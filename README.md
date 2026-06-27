@@ -103,13 +103,21 @@ flowchart TD
 
 ```
 Docker-Journey/
-├── 01-foundation/           # What is Docker, Architecture, Installation
-├── 02-images-containers/    # Dockerfile, Build, Run, Push
-├── 03-networking-volumes/   # Networks, Volumes, Bind Mounts
-├── 04-docker-compose/       # Compose files, Multi-container apps
-├── 05-advanced-security/    # Multi-stage, Trivy, Best Practices
-├── 06-cicd/                 # Jenkins, GitHub Actions, AWS
-└── 07-interview-questions/  # Q&A Beginner → Advanced
+├── 01-docker-foundation/         # What is Docker, Why Docker, Architecture, Installation
+├── 02-docker-images/             # Pull, Build, Tag, Push, Remove Images
+├── 03-docker-containers/         # Run, Stop, Start, Exec, Logs, Inspect, Remove
+├── 04-docker-networking/         # Bridge, Host, None, Custom Networks
+├── 05-docker-volumes/            # Named Volumes, Bind Mounts, Data Persistence
+├── 06-dockerfiles/               # Multiple Dockerfiles — Node, Python, Java, Nginx, Go
+├── 07-docker-compose/            # Multiple Compose files — App+DB, App+DB+Nginx
+├── 08-dockerfile-advanced/       # Multi-stage, ARG, ENV, ENTRYPOINT vs CMD
+├── 09-docker-optimization/       # Image Size, Layer Cache, .dockerignore
+├── 10-docker-security/           # Trivy, Non-root User, Secrets, Scanning
+├── 11-docker-registry/           # Docker Hub, Harbor, AWS ECR
+├── 12-docker-cicd/               # Jenkins Pipeline, GitHub Actions
+├── 13-aws-docker/                # ECR, ECS, EKS, Fargate
+├── 14-docker-real-projects/      # End-to-End Projects with Dockerfile + Compose
+└── 15-docker-interview-questions/ # Q&A Beginner → Advanced → Scenario Based
 ```
 
 ---
@@ -118,13 +126,21 @@ Docker-Journey/
 
 | Phase | Topic | Status |
 |-------|-------|--------|
-| 01 | Foundation | 🔄 In Progress |
-| 02 | Images & Containers | ⏳ Coming Soon |
-| 03 | Networking & Volumes | ⏳ Coming Soon |
-| 04 | Docker Compose | ⏳ Coming Soon |
-| 05 | Advanced & Security | ⏳ Coming Soon |
-| 06 | CI/CD Pipeline | ⏳ Coming Soon |
-| 07 | Interview Questions | ⏳ Coming Soon |
+| 01 | Docker Foundation | 🔄 In Progress |
+| 02 | Docker Images | ⏳ Coming Soon |
+| 03 | Docker Containers | ⏳ Coming Soon |
+| 04 | Docker Networking | ⏳ Coming Soon |
+| 05 | Docker Volumes | ⏳ Coming Soon |
+| 06 | Dockerfiles | ⏳ Coming Soon |
+| 07 | Docker Compose | ⏳ Coming Soon |
+| 08 | Dockerfile Advanced | ⏳ Coming Soon |
+| 09 | Docker Optimization | ⏳ Coming Soon |
+| 10 | Docker Security | ⏳ Coming Soon |
+| 11 | Docker Registry | ⏳ Coming Soon |
+| 12 | Docker CI/CD | ⏳ Coming Soon |
+| 13 | Docker on AWS | ⏳ Coming Soon |
+| 14 | Real Projects | ⏳ Coming Soon |
+| 15 | Interview Questions | ⏳ Coming Soon |
 
 ---
 
