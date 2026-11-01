@@ -1,5 +1,19 @@
 # 🏛️ 02 — Docker Architecture: Client · Daemon · Registry
 
+## 📖 Definition
+
+**Docker architecture** is the design that describes how Docker's parts work together to build, ship, and run containers. It has three main parts:
+
+- the **client** (where you type commands),
+- the **daemon**, also called the server (which does the work), and
+- the **registry** (where images are stored and shared),
+
+plus the objects the daemon manages: **images, containers, networks, and volumes**.
+
+In one line: *you give a command to the client, the client asks the daemon to do it, and the daemon uses images from a registry to create and run containers.*
+
+---
+
 Docker uses a **client–server architecture**. You type commands into a **client**, the client sends them to the **Docker daemon** (the server), and the daemon does the real work: building images, running containers, and talking to registries.
 
 ![Docker Architecture — animated](images/docker-architecture.svg)
@@ -13,7 +27,7 @@ The animation above loops through six commands, so you can see who does what:
 | ③ | `docker ps` | The Daemon sends the list of running containers back to the Client |
 | ④ | `docker build -t myapp .` | The Daemon builds a new image, layer by layer |
 | ⑤ | `docker push myuser/myapp` | The image layers travel from the Daemon up to the Registry, and `myapp` appears there |
-| ⑥ | `docker rm -f web` | The container is stopped and deleted, but the images stay |
+| ⑥ | Docker Desktop: click the trash icon on `web` (same as `docker rm -f web`) | The GUI sends the same API call to the Daemon, and the container is deleted, but the images stay |
 
 Below is the same architecture as a static diagram:
 
