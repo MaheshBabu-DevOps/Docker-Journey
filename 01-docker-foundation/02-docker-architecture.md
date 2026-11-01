@@ -4,7 +4,18 @@ Docker uses a **client–server architecture**. You type commands into a **clien
 
 ![Docker Architecture — animated](images/docker-architecture.svg)
 
-The animation above shows `docker run nginx` end to end. Below is the same architecture as a static diagram:
+The animation above loops through six commands, so you can see who does what:
+
+| Step | Command | What you see |
+|------|---------|--------------|
+| ① | `docker pull nginx` | The Daemon downloads the image layers from the Registry into **Images** |
+| ② | `docker run -d --name web nginx` | The Daemon creates and starts a container from the image |
+| ③ | `docker ps` | The Daemon sends the list of running containers back to the Client |
+| ④ | `docker build -t myapp .` | The Daemon builds a new image, layer by layer |
+| ⑤ | `docker push myuser/myapp` | The image layers travel from the Daemon up to the Registry, and `myapp` appears there |
+| ⑥ | `docker rm -f web` | The container is stopped and deleted, but the images stay |
+
+Below is the same architecture as a static diagram:
 
 ```mermaid
 flowchart LR
