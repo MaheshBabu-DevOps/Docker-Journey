@@ -142,4 +142,5 @@ Containers (isolated, lightweight environments)
 - Because containers share the host kernel, they are fast, but also less isolated than VMs.
 
 ⬅️ Previous: [04 — Docker CLI: First Commands](04-docker-cli-first-commands.md)
+
 ➡️ Next phase: Phase 2 — Docker Images

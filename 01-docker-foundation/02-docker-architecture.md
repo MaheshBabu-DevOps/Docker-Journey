@@ -156,4 +156,5 @@ Linux kernel features that make containers possible:
 - `docker run` = pull image (if needed) → create container → start container.
 
 ⬅️ Previous: [01 — What is Docker](01-what-is-docker.md)
+
 ➡️ Next: [03 — Installing Docker on Linux](03-installation/README.md)

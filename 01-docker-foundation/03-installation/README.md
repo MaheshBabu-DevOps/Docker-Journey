@@ -144,4 +144,5 @@ sudo sh get-docker.sh
 4. Do the [post-install steps](post-install.md).
 
 ⬅️ Previous: [02 — Docker Architecture](../02-docker-architecture.md)
+
 ➡️ Next: [04 — Docker CLI: First Commands](../04-docker-cli-first-commands.md)
