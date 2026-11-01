@@ -72,22 +72,141 @@ VERSION_STRING=5:29.8.2-1~ubuntu.24.04~noble
 sudo apt install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-### Check that the service is running
+### 🔍 Check That the Docker Service Is Running
 
 ```bash
-# Status (press q to exit)
+# Show the service status (press q to exit)
 sudo systemctl status docker
-# Start it only if it is not running
+# Short check: prints "active" if it is running
+systemctl is-active docker
+```
+
+Expected output of `systemctl status docker` (shortened, example):
+
+```text
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; preset: enabled)
+     Active: active (running) since Sun 2026-11-01 23:50:12 IST; 5min ago
+   Main PID: 1234 (dockerd)
+```
+
+| Line | Meaning |
+|------|---------|
+| `Active: active (running)` | The daemon is running. This is what you want. |
+| `Active: inactive (dead)` | Docker is stopped. Start it (next step). |
+| `Loaded: ... enabled` | Docker will start automatically at boot |
+
+**If Docker is stopped, start it:**
+
+```bash
 sudo systemctl start docker
 ```
 
-### Verify
+**Enable Docker at system boot:**
+
+```bash
+sudo systemctl enable docker
+# Check that it is enabled: prints "enabled"
+systemctl is-enabled docker
+```
+
+**Verify Docker is working:**
+
+```bash
+docker info
+```
+
+`docker info` prints details from the daemon, so it also proves the client can reach it. Look for these lines:
+
+```text
+Server:
+ Containers: 0
+ Images: 0
+ Server Version: <version>
+ Storage Driver: overlay2
+```
+
+If you see `permission denied`, add `sudo` (`sudo docker info`) until you do the [post-install steps](post-install.md). If you see `Cannot connect to the Docker daemon`, the service is not running. Go back to the start command above.
+
+**Other service commands you will use:**
+
+```bash
+# Stop the daemon
+sudo systemctl stop docker
+# Restart the daemon (after changing /etc/docker/daemon.json)
+sudo systemctl restart docker
+# Do not start at boot
+sudo systemctl disable docker
+# Show the daemon logs if it will not start
+sudo journalctl -u docker.service -n 50
+```
+
+### ✅ Verify the Installation
+
+Verify that the installation is successful by running the `hello-world` image:
 
 ```bash
 sudo docker run hello-world
 ```
 
-You should see "Hello from Docker!". That means the client reached the daemon, the daemon pulled the image from Docker Hub, created a container, and streamed the output back.
+This command downloads a tiny test image, runs it in a container, prints a message, and exits.
+
+**Expected output** (the digest and layer ID on your machine will differ):
+
+```text
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+c1ec31eb5944: Pull complete
+Digest: sha256:<digest>
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+```
+
+**What each part means:**
+
+| Output | Meaning |
+|--------|---------|
+| `Unable to find image 'hello-world:latest' locally` | The image is not on your machine yet (normal on the first run) |
+| `Pulling from library/hello-world` / `Pull complete` | The daemon is downloading the image from Docker Hub |
+| `Status: Downloaded newer image` | The download finished |
+| `Hello from Docker!` | The container ran and printed its message. **This is your success sign.** |
+| Steps 1 to 4 | The same client → daemon → registry → container flow you learned in [topic 02](../02-docker-architecture.md) |
+
+On the second run, the "Unable to find image" and "Pulling" lines are gone, because the image is already stored locally.
+
+**Extra checks (optional):**
+
+```bash
+# Client and server versions: you must see BOTH a Client and a Server section
+sudo docker version
+# The hello-world container ran and exited, so it only shows with -a
+sudo docker ps -a
+# The image is now stored locally
+sudo docker images
+# Clean up the test container and image
+sudo docker rm $(sudo docker ps -aq --filter ancestor=hello-world)
+sudo docker rmi hello-world
+```
+
+**If it does not work:**
+
+| What you see | What it means | Fix |
+|--------------|---------------|-----|
+| `permission denied while trying to connect to the Docker daemon socket` | You ran without `sudo` and are not in the `docker` group yet | Use `sudo`, or do the [post-install steps](post-install.md) |
+| `Cannot connect to the Docker daemon ... Is the docker daemon running?` | The daemon is stopped | `sudo systemctl start docker` |
+| Hangs on `Pulling from library/hello-world` or says `no such host` | No internet or DNS problem | Check your connection, then try again |
+| `docker: command not found` | Docker did not install | Redo the apt repository and install steps above, and read the output for errors |
 
 **Upgrade:** repeat the install step with the new version.
 
