@@ -42,8 +42,12 @@ flowchart LR
         Daemon["Docker Daemon — dockerd"]
         Images[("📦 Images")]
         Containers[("🧱 Containers")]
+        Networks[("🌐 Networks")]
+        Volumes[("💾 Volumes")]
         Daemon -- manages --> Images
         Daemon -- manages --> Containers
+        Daemon -- manages --> Networks
+        Daemon -- manages --> Volumes
     end
 
     subgraph Registry["☁️ Registry"]
