@@ -302,5 +302,5 @@ Anyone can now run your app anywhere with `docker run -p 5000:5000 <your-dockerh
 - Containers: `run`, `ps`, `stop`, `start`, `rm`
 - `docker run` is the key command: pull, create, and start in one step.
 
-⬅️ Previous: [03 — Installation on Ubuntu](03-installation-ubuntu.md)
+⬅️ Previous: [03 — Installing Docker on Linux](03-installation/README.md)
 ➡️ Next: [05 — How Docker Uses Linux Internals](05-linux-internals-for-docker.md)
